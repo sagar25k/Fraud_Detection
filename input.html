@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraud Detection Input</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.6.0/css/bootstrap.min.css">
+    <style>
+        {% comment %} body {
+            background: linear-gradient(to right, #f12711, #f5af19);
+            color: #fff;
+        } {% endcomment %}
+        {% comment %} .container {
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 50px;
+        } {% endcomment %}
+        h1 {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .btn-primary, .btn-secondary {
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #f5af19;
+            border-color: #f5af19;
+            transform: scale(1.05);
+        }
+        .btn-secondary:hover {
+            background-color: #f12711;
+            border-color: #f12711;
+            transform: scale(1.05);
+        }
+        .form-control-file {
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .form-control-file:hover {
+            transform: scale(1.02);
+        }
+        input[type="file"] {
+            display: block;
+            width: 100%;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
+        input[type="file"]:hover {
+            border-color: #f5af19;
+            box-shadow: 0 0 5px rgba(245, 175, 25, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center">
+        <h1>Upload Dataset</h1>
+        <form action="{% url 'process_input' %}" method="post" enctype="multipart/form-data" class="mt-4">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="file" name="dataset" accept=".csv" required class="form-control-file">
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg">Upload</button>
+        </form>
+        <div class="mt-4">
+            <a href="{% url 'output' %}" class="btn btn-secondary btn-lg">Go to Process Output Page</a>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

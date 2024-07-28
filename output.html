@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraud Detection Results</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.6.0/css/bootstrap.min.css">
+    <style>
+        {% comment %} body {
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: #fff;
+        } {% endcomment %}
+        {% comment %} .container {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 50px;
+        } {% endcomment %}
+        h1, h3 {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .btn-primary, .btn-secondary {
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #0072ff;
+            border-color: #0072ff;
+            transform: scale(1.05);
+        }
+        .btn-secondary:hover {
+            background-color: #00c6ff;
+            border-color: #00c6ff;
+            transform: scale(1.05);
+        }
+        .table-responsive {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            color: #000;
+        }
+        .alert-success {
+            background-color: rgba(40, 167, 69, 0.9);
+        }
+        .alert-danger {
+            background-color: rgba(220, 53, 69, 0.9);
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center">
+        <h1 class="mt-5">Fraud Detection Results</h1>
+        {% if result %}
+            <div class="alert alert-success">
+                <strong>Prediction Result:</strong> {{ result }}
+            </div>
+        {% endif %}
+        {% if metrics %}
+            <h3>Model Evaluation Metrics:</h3>
+            <ul>
+                <li><strong>Accuracy:</strong> {{ metrics.accuracy }}</li>
+                <li><strong>Precision:</strong> {{ metrics.precision }}</li>
+                <li><strong>Recall:</strong> {{ metrics.recall }}</li>
+                <li><strong>F1 Score:</strong> {{ metrics.f1_score }}</li>
+            </ul>
+        {% endif %}
+        <h3>Data Preview:</h3>
+        <div class="table-responsive">
+            {{ data_head|safe }}
+        </div>
+        <h3>Data Description:</h3>
+        <div class="table-responsive">
+            {{ data_description|safe }}
+        </div>
+        {% if vis_url %}
+            <h3>Class Distribution Visualization:</h3>
+            <img src="{{ vis_url }}" alt="Class Distribution" class="img-fluid">
+        {% endif %}
+        {% if error %}
+            <div class="alert alert-danger">
+                <strong>Error:</strong> {{ error }}
+            </div>
+        {% endif %}
+        <div class="mt-4">
+            <a href="{% url 'input' %}" class="btn btn-primary btn-lg">Add Another Dataset</a>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
